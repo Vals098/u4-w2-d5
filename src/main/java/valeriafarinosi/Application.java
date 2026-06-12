@@ -11,6 +11,7 @@ import valeriafarinosi.exceptions.PlayersNumberNotValidException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Application {
@@ -53,6 +54,7 @@ public class Application {
         collection.addElement(labyrinth);
 
         Scanner scanner = new Scanner(System.in);
+
 // -------------------------------- SCELTA AZIONE -----------------------------------
         int scelta;
 
@@ -62,6 +64,10 @@ public class Application {
 
                 System.out.println("1 - Aggiungi un gioco");
                 System.out.println("2 - Cerca gioco tramite id");
+                System.out.println("3 - Confronto prezzo");
+                System.out.println("4 - Ricerca per numero di giocatori");
+                System.out.println("5 - Rimozione di un elemento dato id");
+                System.out.println("6 - ");
 
                 scelta = Integer.parseInt(scanner.nextLine());
 
@@ -227,7 +233,24 @@ public class Application {
 
 //   ------------------------------------ CASO 3 -----------------------------------
                     case 3:
+                        while (true) {
+                            try {
+                                System.out.println("Inserisci un prezzo massimo:");
+                                double inputPrice = Double.parseDouble(scanner.nextLine());
 
+                                List<Game> priceLessThanGames = collection.searchByPrice(inputPrice);
+
+                                if (priceLessThanGames.isEmpty()) {
+                                    System.out.println("Nessun gioco trovato con prezzo inferiore a: " + inputPrice + ",");
+                                    System.out.println("Riprova....");
+                                    continue;
+                                } else
+                                    System.out.println("Lista giochi trovati: " + priceLessThanGames);
+                                break;
+                            } catch (NumberFormatException e) {
+                                System.out.println("Inserisci un valore numerico.");
+                            }
+                        }
 
 //   ------------------------------------ CASO 4 ------------------------------------
 //   ------------------------------------ CASO 5 ------------------------------------

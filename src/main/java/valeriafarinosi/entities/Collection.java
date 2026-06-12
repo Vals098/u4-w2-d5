@@ -32,8 +32,12 @@ public class Collection {
                 '}';
     }
 
-//    ricerca per prezzo
-    public 
+    //    ricerca per prezzo
+    public List<Game> searchByPrice(double inputPrice) {
+        return games.stream().filter(game -> game.getPrice() < inputPrice).toList();
+    }
+
+    ;
 
 
 }
