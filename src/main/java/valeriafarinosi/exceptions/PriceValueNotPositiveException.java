@@ -1,4 +1,4 @@
-package valeriafarinosi.entities.exceptions;
+package valeriafarinosi.exceptions;
 
 public class PriceValueNotPositiveException extends RuntimeException {
     public PriceValueNotPositiveException() {

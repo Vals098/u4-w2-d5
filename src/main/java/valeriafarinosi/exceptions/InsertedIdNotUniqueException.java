@@ -1,4 +1,4 @@
-package valeriafarinosi.entities.exceptions;
+package valeriafarinosi.exceptions;
 
 public class InsertedIdNotUniqueException extends RuntimeException {
     public InsertedIdNotUniqueException() {

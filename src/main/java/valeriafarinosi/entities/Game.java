@@ -1,25 +1,25 @@
 package valeriafarinosi.entities;
 
-import valeriafarinosi.entities.exceptions.PriceValueNotPositiveException;
+import valeriafarinosi.exceptions.PriceValueNotPositiveException;
 
 import java.time.LocalDate;
 
-public abstract class Gioco {
-    protected String id;
+public abstract class Game {
+    protected final String ID;
     protected String title;
     protected LocalDate date;
     protected double price;
 
 
-    protected Gioco(String id, String title, LocalDate date, double price) {
-        this.id = id;
+    protected Game(String ID, String title, LocalDate date, double price) {
+        this.ID = ID;
         this.title = title;
         this.date = date;
         setPrice(price);
     }
 
     public String getId() {
-        return id;
+        return ID;
     }
 
     public String getTitle() {
