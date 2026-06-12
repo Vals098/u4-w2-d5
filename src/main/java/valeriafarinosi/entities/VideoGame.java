@@ -40,4 +40,17 @@ public class VideoGame extends Game {
     public void setGenre(Genres genre) {
         this.genre = genre;
     }
+
+    @Override
+    public String toString() {
+        return "VideoGame{" +
+                "title='" + title + '\'' +
+                ", platform=" + platform +
+                ", gameplayDuration=" + gameplayDuration +
+                ", genre=" + genre +
+                ", ID='" + ID + '\'' +
+                ", date=" + date +
+                ", price=" + price +
+                '}';
+    }
 }
