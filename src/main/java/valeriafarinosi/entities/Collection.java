@@ -1,5 +1,6 @@
 package valeriafarinosi.entities;
 
+import valeriafarinosi.exceptions.CouldNotFindGameException;
 import valeriafarinosi.exceptions.InsertedIdNotUniqueException;
 
 import java.util.ArrayList;
@@ -45,6 +46,10 @@ public class Collection {
     //    rimozione di un elemento dato id
     public void removeById(String id) {
         boolean ifSame = games.removeIf(game -> game.getId().equals(id));
+
+        if (!ifSame) {
+            throw new CouldNotFindGameException();
+        }
     }
 
 }
