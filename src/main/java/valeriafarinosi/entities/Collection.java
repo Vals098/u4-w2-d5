@@ -31,4 +31,9 @@ public class Collection {
                 "games=" + games +
                 '}';
     }
+
+//    ricerca per prezzo
+    public 
+
+
 }
