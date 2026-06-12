@@ -5,6 +5,7 @@ import valeriafarinosi.entities.Collection;
 import valeriafarinosi.entities.VideoGame;
 import valeriafarinosi.enums.Genres;
 import valeriafarinosi.enums.Platforms;
+import valeriafarinosi.exceptions.PlayersNumberNotValidException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -50,7 +51,7 @@ public class Application {
         collection.addElement(labyrinth);
 
         Scanner scanner = new Scanner(System.in);
-
+//scalta azione
         int scelta;
 
         while (true) {
@@ -92,63 +93,101 @@ public class Application {
 
                                 System.out.println("Inserisci il prezzo:");
                                 double price = Double.parseDouble(scanner.nextLine());
+                                while (true) {
+                                    try {
+                                        System.out.println("Di che tipologia di gioco si tratta?");
+                                        System.out.println("1 - VideoGame");
+                                        System.out.println("2 - BoardGame");
 
-                                System.out.println("Di che tipologia di gioco si tratta?");
-                                System.out.println("1 - VideoGame");
-                                System.out.println("2 - BoardGame");
+                                        int type = Integer.parseInt(scanner.nextLine());
 
-                                int type = Integer.parseInt(scanner.nextLine());
+//                verifica numero nei ranghi
+                                        if (type < 1 || type > 2) {
+                                            System.out.println("Inserisci un numero tra 1 e 2.");
+                                            continue;
+                                        }
 
-                                if (type == 1) {
+                                        if (type == 1) {
 //                            videogame
-                                    System.out.println("VideoGame");
-                                    System.out.println("Inserisci una piattaforma tra:");
-                                    System.out.println("PC,PS4,PS5,XBOX,VR_HEADSET,SWITCH,WII,OTHER");
-                                    Platforms platform = Platforms.valueOf(scanner.nextLine().toUpperCase());
 
-                                    System.out.println("Inserisci una durata di gioco (h):");
-                                    double gameplayDuration = Double.parseDouble(scanner.nextLine());
+                                            Platforms platform;
+                                            double gameplayDuration;
+                                            Genres genre;
 
-                                    System.out.println("Inserisci un genere tra:");
-                                    System.out.println("ACTION,ADVENTURE,SHOOTER,CHILDREN,SPORT,ARCADE,STRATEGY,OTHER");
-                                    Genres genre = Genres.valueOf(scanner.nextLine().toUpperCase());
+                                            System.out.println("--------------------------- VideoGame --------------------------");
+                                            while (true) {
+                                                try {
+                                                    System.out.println("Inserisci una piattaforma tra:");
+                                                    System.out.println("PC,PS4,PS5,XBOX,VR_HEADSET,SWITCH,WII,OTHER");
+                                                    platform = Platforms.valueOf(scanner.nextLine().toUpperCase());
+
+                                                    System.out.println("Inserisci una durata di gioco (h):");
+                                                    gameplayDuration = Double.parseDouble(scanner.nextLine());
+
+                                                    System.out.println("Inserisci un genere tra:");
+                                                    System.out.println("ACTION,ADVENTURE,SHOOTER,CHILDREN,SPORT,ARCADE,STRATEGY,OTHER");
+                                                    genre = Genres.valueOf(scanner.nextLine().toUpperCase());
 
 
 //                                    salvo i dati come videogioco
-                                    VideoGame videoGame = new VideoGame(
-                                            ID, title, date, price, platform, gameplayDuration, genre
-                                    );
+                                                    VideoGame videoGame = new VideoGame(
+                                                            ID, title, date, price, platform, gameplayDuration, genre
+                                                    );
 //                                    aggiungo il nuovo videoGame a collection
-                                    collection.addElement(videoGame);
-                                    System.out.println("VideoGioco creato con successo!!");
+                                                    collection.addElement(videoGame);
+                                                    System.out.println("VideoGioco creato con successo!!");
 
-                                    break;
-                                } else if (type == 2) {
+                                                    break;
+                                                } catch (NumberFormatException e) {
+                                                    System.out.println("Inserisci un numero.");
+                                                }
+                                                ;
+                                            }
+                                        } else if (type == 2) {
 //                            boardgame
-                                    System.out.println("BoardGame");
-                                    System.out.println("Inserisci un numero di giocatori tra 2 e 10:");
-                                    int players = Integer.parseInt(scanner.nextLine());
+                                            System.out.println("--------------------------- BoardGame --------------------------");
 
-                                    System.out.println("Inserisci la durata di gioco(min):");
-                                    double averageGameplayDuration = Double.parseDouble(scanner.nextLine());
+                                            int players;
+                                            double averageGameplayDuration;
+
+                                            while (true) {
+                                                try {
+                                                    System.out.println("Inserisci un numero di giocatori tra 2 e 10:");
+                                                    players = Integer.parseInt(scanner.nextLine());
+
+                                                    if (players < 2 || players > 10) {
+                                                        throw new PlayersNumberNotValidException();
+                                                    }
+
+                                                    System.out.println("Inserisci la durata di gioco(min):");
+                                                    averageGameplayDuration = Double.parseDouble(scanner.nextLine());
 
 //                                    salvo i dati come boardGame
-                                    BoardGame boardGame = new BoardGame(ID, title, date, price, players, averageGameplayDuration);
+                                                    BoardGame boardGame = new BoardGame(ID, title, date, price, players, averageGameplayDuration);
 
 //                                    aggiungo il nuovo boardGama a collection
-                                    collection.addElement(boardGame);
-                                    System.out.println("BoardGame creato con successo!!");
+                                                    collection.addElement(boardGame);
+                                                    System.out.println("BoardGame creato con successo!!");
 
-                                    break;
-                                } else {
-                                    System.out.println("Inserisci un numero valido: 1 o 2");
+                                                    break;
+                                                } catch (PlayersNumberNotValidException e) {
+                                                    System.out.println(e.getMessage());
+                                                } catch (NumberFormatException e) {
+                                                    System.out.println("Inserisci un numero.");
+                                                }
+                                            }
+                                            break;
+                                        }
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Inserisci un numero tra 1 e 2.");
+
+                                    }
                                 }
                                 ;
                             } catch (NumberFormatException e) {
                                 System.out.println("Inserisci un valore numerico.");
                             }
                         }
-                        break;
                 }
 
 
