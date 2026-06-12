@@ -2,6 +2,7 @@ package valeriafarinosi;
 
 import valeriafarinosi.entities.BoardGame;
 import valeriafarinosi.entities.Collection;
+import valeriafarinosi.entities.Game;
 import valeriafarinosi.entities.VideoGame;
 import valeriafarinosi.enums.Genres;
 import valeriafarinosi.enums.Platforms;
@@ -59,6 +60,7 @@ public class Application {
                 System.out.println("Inserisci il numero corrispondente all'azione desiderata:");
 
                 System.out.println("1 - Aggiungi un gioco");
+                System.out.println("2 - Cerca gioco tramite id");
 
                 scelta = Integer.parseInt(scanner.nextLine());
 
@@ -69,6 +71,7 @@ public class Application {
                 }
 
                 switch (scelta) {
+//    -------------------------------------- CASO 1 ----------------------------------------
                     case 1:
                         boolean isCreated = false;
 
@@ -193,13 +196,30 @@ public class Application {
                                 }
                                 ;
                                 if (isCreated) {
-                                    System.out.println(collection);
+                                    System.out.println("Nuova collezione: " + collection);
                                     break;
                                 }
                             } catch (NumberFormatException e) {
                                 System.out.println("Inserisci un valore numerico.");
                             }
 
+                        }
+
+//     ----------------------------------- CASO 2 -------------------------------------
+                    case 2:
+                        while (true) {
+                            System.out.println("Inserisci un id da confrontare:");
+                            String id = scanner.nextLine();
+
+                            Game givenGame = collection.searchById(id);
+
+                            if (givenGame == null) {
+                                System.out.println("Nessun gioco trovato con questo id,");
+                                System.out.println("Riprova....");
+                                continue;
+                            } else
+                                System.out.println("Trovato! -> " + givenGame);
+                            break;
                         }
                 }
 

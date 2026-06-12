@@ -20,6 +20,11 @@ public class Collection {
         }
     }
 
+    //    ricerca per id
+    public Game searchById(String ID) {
+        return games.stream().filter(game -> game.getId().equals(ID)).findAny().orElse(null);
+    }
+
     @Override
     public String toString() {
         return "Collection{" +
