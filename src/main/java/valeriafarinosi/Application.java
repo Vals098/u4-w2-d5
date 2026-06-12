@@ -51,7 +51,7 @@ public class Application {
         collection.addElement(labyrinth);
 
         Scanner scanner = new Scanner(System.in);
-//scalta azione
+// -------------------------------- SCELTA AZIONE -----------------------------------
         int scelta;
 
         while (true) {
@@ -70,6 +70,8 @@ public class Application {
 
                 switch (scelta) {
                     case 1:
+                        boolean isCreated = false;
+
                         while (true) {
                             try {
                                 System.out.println("Inserisci un ID:");
@@ -93,6 +95,9 @@ public class Application {
 
                                 System.out.println("Inserisci il prezzo:");
                                 double price = Double.parseDouble(scanner.nextLine());
+
+//  --------------------------------- SCELTA TIPOLOGIA DI GIOCO -----------------------------
+
                                 while (true) {
                                     try {
                                         System.out.println("Di che tipologia di gioco si tratta?");
@@ -107,8 +112,7 @@ public class Application {
                                             continue;
                                         }
 
-                                        if (type == 1) {
-//                            videogame
+                                        if (type == 1) { //VIDEOGAME
 
                                             Platforms platform;
                                             double gameplayDuration;
@@ -137,14 +141,15 @@ public class Application {
                                                     collection.addElement(videoGame);
                                                     System.out.println("VideoGioco creato con successo!!");
 
+                                                    isCreated = true;
                                                     break;
                                                 } catch (NumberFormatException e) {
                                                     System.out.println("Inserisci un numero.");
                                                 }
                                                 ;
                                             }
-                                        } else if (type == 2) {
-//                            boardgame
+                                        } else if (type == 2) { //BOARDGAME
+
                                             System.out.println("--------------------------- BoardGame --------------------------");
 
                                             int players;
@@ -169,6 +174,7 @@ public class Application {
                                                     collection.addElement(boardGame);
                                                     System.out.println("BoardGame creato con successo!!");
 
+                                                    isCreated = true;
                                                     break;
                                                 } catch (PlayersNumberNotValidException e) {
                                                     System.out.println(e.getMessage());
@@ -176,6 +182,8 @@ public class Application {
                                                     System.out.println("Inserisci un numero.");
                                                 }
                                             }
+                                        }
+                                        if (isCreated) {
                                             break;
                                         }
                                     } catch (NumberFormatException e) {
@@ -184,9 +192,14 @@ public class Application {
                                     }
                                 }
                                 ;
+                                if (isCreated) {
+                                    System.out.println(collection);
+                                    break;
+                                }
                             } catch (NumberFormatException e) {
                                 System.out.println("Inserisci un valore numerico.");
                             }
+
                         }
                 }
 
