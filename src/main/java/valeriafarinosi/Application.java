@@ -6,6 +6,7 @@ import valeriafarinosi.entities.Game;
 import valeriafarinosi.entities.VideoGame;
 import valeriafarinosi.enums.Genres;
 import valeriafarinosi.enums.Platforms;
+import valeriafarinosi.exceptions.InsertedIdNotUniqueException;
 import valeriafarinosi.exceptions.PlayersNumberNotValidException;
 
 import java.time.LocalDate;
@@ -77,6 +78,7 @@ public class Application {
 
                         while (true) {
                             try {
+
                                 System.out.println("Inserisci un ID:");
                                 String ID = scanner.nextLine();
 
@@ -148,6 +150,9 @@ public class Application {
                                                     break;
                                                 } catch (NumberFormatException e) {
                                                     System.out.println("Inserisci un numero.");
+                                                } catch (InsertedIdNotUniqueException e) {
+                                                    System.out.println(e.getMessage());
+
                                                 }
                                                 ;
                                             }
@@ -163,10 +168,6 @@ public class Application {
                                                     System.out.println("Inserisci un numero di giocatori tra 2 e 10:");
                                                     players = Integer.parseInt(scanner.nextLine());
 
-                                                    if (players < 2 || players > 10) {
-                                                        throw new PlayersNumberNotValidException();
-                                                    }
-
                                                     System.out.println("Inserisci la durata di gioco(min):");
                                                     averageGameplayDuration = Double.parseDouble(scanner.nextLine());
 
@@ -179,6 +180,8 @@ public class Application {
 
                                                     isCreated = true;
                                                     break;
+                                                } catch (InsertedIdNotUniqueException e) {
+                                                    System.out.println(e.getMessage());
                                                 } catch (PlayersNumberNotValidException e) {
                                                     System.out.println(e.getMessage());
                                                 } catch (NumberFormatException e) {
@@ -221,6 +224,18 @@ public class Application {
                                 System.out.println("Trovato! -> " + givenGame);
                             break;
                         }
+
+//   ------------------------------------ CASO 3 -----------------------------------
+                    case 3:
+
+
+//   ------------------------------------ CASO 4 ------------------------------------
+//   ------------------------------------ CASO 5 ------------------------------------
+//   ------------------------------------ CASO 6 ------------------------------------
+//   ------------------------------------ CASO 7 ------------------------------------
+//   ------------------------------------ CASO 8 ------------------------------------
+
+
                 }
 
 
