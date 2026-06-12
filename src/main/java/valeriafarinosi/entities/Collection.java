@@ -37,7 +37,10 @@ public class Collection {
         return games.stream().filter(game -> game.getPrice() < inputPrice).toList();
     }
 
-    ;
+    //    ricerca per numero di giocatori, quindi tra i soli BoardGame
+    public List<BoardGame> searchByPlayers(int inputPlayers) {
+        return games.stream().filter(game -> game instanceof BoardGame).map(game -> (BoardGame) game).filter(boardGame -> boardGame.getPlayers() == inputPlayers).toList();
+    }
 
 
 }

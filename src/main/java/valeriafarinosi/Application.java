@@ -67,13 +67,14 @@ public class Application {
                 System.out.println("3 - Confronto prezzo");
                 System.out.println("4 - Ricerca per numero di giocatori");
                 System.out.println("5 - Rimozione di un elemento dato id");
-                System.out.println("6 - ");
+                System.out.println("6 - Aggiornamento di un elemento tramite id");
+                System.out.println("7 - Statistiche della collezione");
 
                 scelta = Integer.parseInt(scanner.nextLine());
 
 //                verifica numero nei ranghi
-                if (scelta < 1 || scelta > 8) {
-                    System.out.println("Inserisci un numero valido: da 1 a 8.");
+                if (scelta < 1 || scelta > 7) {
+                    System.out.println("Inserisci un numero valido: da 1 a 7.");
                     continue;
                 }
 
@@ -253,10 +254,32 @@ public class Application {
                         }
 
 //   ------------------------------------ CASO 4 ------------------------------------
+                    case 4:
+                        while (true) {
+                            try {
+
+                                System.out.println("Inserisci il numero di giocatori, da 2 a 10:");
+                                int inputPlayers = Integer.parseInt(scanner.nextLine());
+
+                                List<BoardGame> gamesWithThosePlayers =
+                                        collection.searchByPlayers(inputPlayers);
+
+                                if (gamesWithThosePlayers.isEmpty()) {
+                                    System.out.println("Nessun gioco trovato con numero giocatori: " + inputPlayers);
+                                    System.out.println("Riprova...");
+                                    continue;
+                                }
+                                System.out.println("Lista giochi trovati:");
+                                gamesWithThosePlayers.forEach(System.out::println);
+                                break;
+                            } catch (NumberFormatException e) {
+                                System.out.println("Inserisci un valore numerico.");
+                            }
+                        }
+
 //   ------------------------------------ CASO 5 ------------------------------------
 //   ------------------------------------ CASO 6 ------------------------------------
 //   ------------------------------------ CASO 7 ------------------------------------
-//   ------------------------------------ CASO 8 ------------------------------------
 
 
                 }
