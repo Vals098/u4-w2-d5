@@ -6,6 +6,7 @@ import valeriafarinosi.entities.Game;
 import valeriafarinosi.entities.VideoGame;
 import valeriafarinosi.enums.Genres;
 import valeriafarinosi.enums.Platforms;
+import valeriafarinosi.exceptions.CouldNotFindGameException;
 import valeriafarinosi.exceptions.InsertedIdNotUniqueException;
 import valeriafarinosi.exceptions.PlayersNumberNotValidException;
 
@@ -278,6 +279,25 @@ public class Application {
                         }
 
 //   ------------------------------------ CASO 5 ------------------------------------
+                    case 5:
+                        while (true) {
+                            try {
+                                System.out.println(collection);
+                                System.out.println("Inserisci id del gioco da eliminare:");
+                                String inputId = scanner.nextLine();
+
+                                collection.removeById(inputId);
+
+                                System.out.println("Gioco eliminato!!");
+                                System.out.println("Collezione aggiornata: " + collection);
+                                break;
+                            } catch (CouldNotFindGameException e) {
+                                System.out.println(e.getMessage());
+                            }
+
+                        }
+
+
 //   ------------------------------------ CASO 6 ------------------------------------
 //   ------------------------------------ CASO 7 ------------------------------------
 

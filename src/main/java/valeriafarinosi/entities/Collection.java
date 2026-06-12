@@ -42,5 +42,9 @@ public class Collection {
         return games.stream().filter(game -> game instanceof BoardGame).map(game -> (BoardGame) game).filter(boardGame -> boardGame.getPlayers() == inputPlayers).toList();
     }
 
+    //    rimozione di un elemento dato id
+    public void removeById(String id) {
+        boolean ifSame = games.removeIf(game -> game.getId().equals(id));
+    }
 
 }
