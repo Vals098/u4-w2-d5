@@ -34,4 +34,16 @@ public class BoardGame extends Game {
     public void setAverageGameplayDuration(double averageGameplayDuration) {
         this.averageGameplayDuration = averageGameplayDuration;
     }
+
+    @Override
+    public String toString() {
+        return "BoardGame{" +
+                "players=" + players +
+                ", averageGameplayDuration=" + averageGameplayDuration +
+                ", ID='" + ID + '\'' +
+                ", title='" + title + '\'' +
+                ", date=" + date +
+                ", price=" + price +
+                '}';
+    }
 }

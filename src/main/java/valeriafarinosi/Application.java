@@ -7,6 +7,7 @@ import valeriafarinosi.enums.Genres;
 import valeriafarinosi.enums.Platforms;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Application {
@@ -62,32 +63,92 @@ public class Application {
 
 //                verifica numero nei ranghi
                 if (scelta < 1 || scelta > 8) {
-                    System.out.println("Scelta non valida.");
+                    System.out.println("Inserisci un numero valido: da 1 a 8.");
                     continue;
                 }
 
                 switch (scelta) {
                     case 1:
                         while (true) {
-                            System.out.println("Di che tipologia di gioco si tratta?");
-                            System.out.println("1 - VideoGame");
-                            System.out.println("2 - BoardGame");
+                            try {
+                                System.out.println("Inserisci un ID:");
+                                String ID = scanner.nextLine();
 
-                            int type = Integer.parseInt(scanner.nextLine());
+                                System.out.println("Inserisci un titolo:");
+                                String title = scanner.nextLine();
 
-                            if (type == 1) {
+                                LocalDate date;
+
+                                while (true) {
+                                    try {
+                                        System.out.println("Inserisci una data di uscita (YYYY-MM-DD):");
+                                        date = LocalDate.parse(scanner.nextLine());
+                                        break;
+
+                                    } catch (DateTimeParseException e) {
+                                        System.out.println("Formato data non valido. Usa YYYY-MM-DD");
+                                    }
+                                }
+
+                                System.out.println("Inserisci il prezzo:");
+                                double price = Double.parseDouble(scanner.nextLine());
+
+                                System.out.println("Di che tipologia di gioco si tratta?");
+                                System.out.println("1 - VideoGame");
+                                System.out.println("2 - BoardGame");
+
+                                int type = Integer.parseInt(scanner.nextLine());
+
+                                if (type == 1) {
 //                            videogame
-                                System.out.println("videogame");
-                                break;
-                            } else if (type == 2) {
-//                            boardgame
-                                System.out.println("boardgame");
-                                break;
-                            } else
-                                System.out.println("Numero scelto non valido");
-                            ;
-                        }
+                                    System.out.println("VideoGame");
+                                    System.out.println("Inserisci una piattaforma tra:");
+                                    System.out.println("PC,PS4,PS5,XBOX,VR_HEADSET,SWITCH,WII,OTHER");
+                                    Platforms platform = Platforms.valueOf(scanner.nextLine().toUpperCase());
 
+                                    System.out.println("Inserisci una durata di gioco (h):");
+                                    double gameplayDuration = Double.parseDouble(scanner.nextLine());
+
+                                    System.out.println("Inserisci un genere tra:");
+                                    System.out.println("ACTION,ADVENTURE,SHOOTER,CHILDREN,SPORT,ARCADE,STRATEGY,OTHER");
+                                    Genres genre = Genres.valueOf(scanner.nextLine().toUpperCase());
+
+
+//                                    salvo i dati come videogioco
+                                    VideoGame videoGame = new VideoGame(
+                                            ID, title, date, price, platform, gameplayDuration, genre
+                                    );
+//                                    aggiungo il nuovo videoGame a collection
+                                    collection.addElement(videoGame);
+                                    System.out.println("VideoGioco creato con successo!!");
+
+                                    break;
+                                } else if (type == 2) {
+//                            boardgame
+                                    System.out.println("BoardGame");
+                                    System.out.println("Inserisci un numero di giocatori tra 2 e 10:");
+                                    int players = Integer.parseInt(scanner.nextLine());
+
+                                    System.out.println("Inserisci la durata di gioco(min):");
+                                    double averageGameplayDuration = Double.parseDouble(scanner.nextLine());
+
+//                                    salvo i dati come boardGame
+                                    BoardGame boardGame = new BoardGame(ID, title, date, price, players, averageGameplayDuration);
+
+//                                    aggiungo il nuovo boardGama a collection
+                                    collection.addElement(boardGame);
+                                    System.out.println("BoardGame creato con successo!!");
+
+                                    break;
+                                } else {
+                                    System.out.println("Inserisci un numero valido: 1 o 2");
+                                }
+                                ;
+                            } catch (NumberFormatException e) {
+                                System.out.println("Inserisci un valore numerico.");
+                            }
+                        }
+                        break;
                 }
 
 

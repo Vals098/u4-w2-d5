@@ -7,5 +7,6 @@ public enum Platforms {
     XBOX,
     VR_HEADSET,
     SWITCH,
-    WII
+    WII,
+    OTHER
 }
