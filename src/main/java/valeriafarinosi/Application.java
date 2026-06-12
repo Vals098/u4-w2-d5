@@ -299,8 +299,12 @@ public class Application {
 
 
 //   ------------------------------------ CASO 6 ------------------------------------
-//   ------------------------------------ CASO 7 ------------------------------------
+                    case 6:
+                        System.out.println("Azione ancora non implementata");
 
+//   ------------------------------------ CASO 7 ------------------------------------
+                    case 7:
+                        System.out.println("Azione ancora non implementata");
 
                 }
 
